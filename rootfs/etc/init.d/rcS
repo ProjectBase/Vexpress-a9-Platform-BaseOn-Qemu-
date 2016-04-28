@@ -1,0 +1,21 @@
+#!/bin/sh
+PATH=/sbin:/bin:/usr/sbin:/usr/bin
+runlevel=S
+prevlevel=N
+umask 022
+export PATH runlevel prevlevel
+
+echo "----------munt all----------------"
+mount -a
+
+echo /sbin/mdev>/proc/sys/kernel/hotplug
+mdev -s
+
+echo "***********************************************"
+echo "****************Studying ARM*********************"
+echo "Kernel version:linux-2.6.29.1"
+echo "Student:Feng dong rui"
+echo "Date:2009.07.15"
+echo "***********************************************"
+
+#/bin/hostname -F /etc/sysconfig/HOSTNAME 
