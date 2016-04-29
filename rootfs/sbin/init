@@ -1,1 +1,14 @@
-../bin/busybox
+#!/bin/sh
+
+echo "entry init file"
+
+/bin/sh
+
+set j=2
+while true
+do
+        let "j=j+1"
+        echo "----------j is $j--------------"
+sleep 10s
+
+done

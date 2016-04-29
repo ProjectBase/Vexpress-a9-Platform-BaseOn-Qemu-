@@ -1,0 +1,10 @@
+#!/bin/sh
+
+echo "entry init file"
+
+set j=2
+while true
+do
+        let "j=j+1"
+        echo "----------j is $j--------------"
+done
