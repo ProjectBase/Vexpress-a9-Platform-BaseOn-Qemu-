@@ -1,14 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
-echo "entry init file"
-
-/bin/sh
-
-set j=2
-while true
-do
-        let "j=j+1"
-        echo "----------j is $j--------------"
-sleep 10s
-
-done
+export XDG_RUNTIME_DIR=/tmp
+exec /lib/systemd/systemd --log-level=debug

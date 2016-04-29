@@ -1,0 +1,13 @@
+[Unit]
+Description=Rescue Mode
+Documentation=man:systemd.mobo
+Requires=basic.target
+AllowIsolate=yes
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/bin/sh
+
+[Install]
+Alias=kbrequest.target

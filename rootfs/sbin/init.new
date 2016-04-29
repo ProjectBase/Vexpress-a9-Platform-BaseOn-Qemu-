@@ -2,9 +2,4 @@
 
 echo "entry init file"
 
-set j=2
-while true
-do
-        let "j=j+1"
-        echo "----------j is $j--------------"
-done
+exec /usr/lib/systemd/systemd --log-level=debug --log-location=1 --dump-core=1 --show-status=1 --confirm-spawn --log-target=consol
