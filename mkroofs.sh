@@ -15,7 +15,7 @@ sudo mknod rootfs/dev/tty3 c 4 3
 sudo mknod rootfs/dev/tty4 c 4 4
 
 
-dd if=/dev/zero of=a9rootfs.ext3 bs=1M count=32
+dd if=/dev/zero of=a9rootfs.ext3 bs=1M count=1024
 mkfs.ext3 a9rootfs.ext3
 
 

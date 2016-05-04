@@ -1,0 +1,12 @@
+[Unit]
+Description=D-Bus System Message Bus Socket
+After=pretty-early.target
+Before=sockets.target
+DefaultDependencies=no
+
+[Socket]
+ListenStream=/var/run/dbus/system_bus_socket
+
+[Install]
+RequiredBy=sockets.target
+

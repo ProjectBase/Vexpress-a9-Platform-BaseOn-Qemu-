@@ -1,4 +1,4 @@
-You are looking for the traditional text log files in //var/log, and
+You are looking for the traditional text log files in /var/log, and
 they are gone?
 
 Here's an explanation on what's going on:
@@ -8,7 +8,7 @@ replaced with the Journal. The journal stores the same (and more)
 information as classic syslog. To make use of the journal and access
 the collected log data simply invoke "journalctl", which will output
 the logs in the identical text-based format the syslog files in
-//var/log used to be. For further details, please refer to
+/var/log used to be. For further details, please refer to
 journalctl(1).
 
 Alternatively, consider installing one of the traditional syslog

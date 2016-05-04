@@ -1,4 +1,5 @@
-#!/bin/bash
+#!/bin/sh
 
-export XDG_RUNTIME_DIR=/tmp
-exec /lib/systemd/systemd --log-level=debug
+echo entry init file
+exec /lib/systemd/systemd --log-level=debug 
+#--log-location=1 --dump-core=1 --show-status=1 --confirm-spawn --log-target=console 

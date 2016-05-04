@@ -33,7 +33,7 @@
         and system services on Unix; document the systemd transport</td></tr><tr><td align="left">Revision 0.18</td><td align="left">29 July 2011</td><td align="left">smcv</td></tr><tr><td align="left" colspan="3">define eavesdropping, unicast, broadcast; add eavesdrop
          match keyword; promote type system to a top-level section</td></tr><tr><td align="left">Revision 0.17</td><td align="left">1 June 2011</td><td align="left">smcv/davidz</td></tr><tr><td align="left" colspan="3">define ObjectManager; reserve extra pseudo-type-codes used
          by GVariant</td></tr><tr><td align="left">Revision 0.16</td><td align="left">11 April 2011</td><td align="left"></td></tr><tr><td align="left" colspan="3">add path_namespace, arg0namespace; argNpath matches object
-        paths</td></tr><tr><td align="left">Revision 0.15</td><td align="left">3 November 2010</td><td align="left"></td></tr><tr><td align="left" colspan="3"></td></tr><tr><td align="left">Revision 0.14</td><td align="left">12 May 2010</td><td align="left"></td></tr><tr><td align="left" colspan="3"></td></tr><tr><td align="left">Revision 0.13</td><td align="left">23 Dezember 2009</td><td align="left"></td></tr><tr><td align="left" colspan="3"></td></tr><tr><td align="left">Revision 0.12</td><td align="left">7 November, 2006</td><td align="left"></td></tr><tr><td align="left" colspan="3"></td></tr><tr><td align="left">Revision 0.11</td><td align="left">6 February 2005</td><td align="left"></td></tr><tr><td align="left" colspan="3"></td></tr><tr><td align="left">Revision 0.10</td><td align="left">28 January 2005</td><td align="left"></td></tr><tr><td align="left" colspan="3"></td></tr><tr><td align="left">Revision 0.9</td><td align="left">7 Januar 2005</td><td align="left"></td></tr><tr><td align="left" colspan="3"></td></tr><tr><td align="left">Revision 0.8</td><td align="left">06 September 2003</td><td align="left"></td></tr><tr><td align="left" colspan="3">First released document.</td></tr></table></div></div></div><hr></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="sect1"><a href="#introduction">Introduction</a></span></dt><dd><dl><dt><span class="sect2"><a href="#stability">Protocol and Specification Stability</a></span></dt></dl></dd><dt><span class="sect1"><a href="#type-system">Type System</a></span></dt><dd><dl><dt><span class="sect2"><a href="#basic-types">Basic types</a></span></dt><dt><span class="sect2"><a href="#container-types">Container types</a></span></dt><dt><span class="sect2"><a href="#idp3387016">Summary of types</a></span></dt></dl></dd><dt><span class="sect1"><a href="#message-protocol-marshaling">Marshaling (Wire Format)</a></span></dt><dd><dl><dt><span class="sect2"><a href="#idp3417240">Byte order and alignment</a></span></dt><dt><span class="sect2"><a href="#idp3420776">Marshalling basic types</a></span></dt><dt><span class="sect2"><a href="#idp3423792">Marshalling containers</a></span></dt><dt><span class="sect2"><a href="#idp3428728">Summary of D-Bus marshalling</a></span></dt></dl></dd><dt><span class="sect1"><a href="#message-protocol">Message Protocol</a></span></dt><dd><dl><dt><span class="sect2"><a href="#message-protocol-messages">Message Format</a></span></dt><dt><span class="sect2"><a href="#message-protocol-names">Valid Names</a></span></dt><dt><span class="sect2"><a href="#message-protocol-types">Message Types</a></span></dt><dt><span class="sect2"><a href="#message-protocol-handling-invalid">Invalid Protocol and Spec Extensions</a></span></dt></dl></dd><dt><span class="sect1"><a href="#auth-protocol">Authentication Protocol</a></span></dt><dd><dl><dt><span class="sect2"><a href="#auth-protocol-overview">Protocol Overview</a></span></dt><dt><span class="sect2"><a href="#auth-nul-byte">Special credentials-passing nul byte</a></span></dt><dt><span class="sect2"><a href="#auth-command-auth">AUTH command</a></span></dt><dt><span class="sect2"><a href="#auth-command-cancel">CANCEL Command</a></span></dt><dt><span class="sect2"><a href="#auth-command-data">DATA Command</a></span></dt><dt><span class="sect2"><a href="#auth-command-begin">BEGIN Command</a></span></dt><dt><span class="sect2"><a href="#auth-command-rejected">REJECTED Command</a></span></dt><dt><span class="sect2"><a href="#auth-command-ok">OK Command</a></span></dt><dt><span class="sect2"><a href="#auth-command-error">ERROR Command</a></span></dt><dt><span class="sect2"><a href="#auth-command-negotiate-unix-fd">NEGOTIATE_UNIX_FD Command</a></span></dt><dt><span class="sect2"><a href="#auth-command-agree-unix-fd">AGREE_UNIX_FD Command</a></span></dt><dt><span class="sect2"><a href="#auth-command-future">Future Extensions</a></span></dt><dt><span class="sect2"><a href="#auth-examples">Authentication examples</a></span></dt><dt><span class="sect2"><a href="#auth-states">Authentication state diagrams</a></span></dt><dt><span class="sect2"><a href="#auth-mechanisms">Authentication mechanisms</a></span></dt></dl></dd><dt><span class="sect1"><a href="#addresses">Server Addresses</a></span></dt><dt><span class="sect1"><a href="#transports">Transports</a></span></dt><dd><dl><dt><span class="sect2"><a href="#transports-unix-domain-sockets">Unix Domain Sockets</a></span></dt><dt><span class="sect2"><a href="#transports-launchd">launchd</a></span></dt><dt><span class="sect2"><a href="#transports-systemd">systemd</a></span></dt><dt><span class="sect2"><a href="#transports-tcp-sockets">TCP Sockets</a></span></dt><dt><span class="sect2"><a href="#transports-nonce-tcp-sockets">Nonce-secured TCP Sockets</a></span></dt><dt><span class="sect2"><a href="#transports-exec">Executed Subprocesses on Unix</a></span></dt></dl></dd><dt><span class="sect1"><a href="#meta-transports">Meta Transports</a></span></dt><dd><dl><dt><span class="sect2"><a href="#meta-transports-autolaunch">Autolaunch</a></span></dt></dl></dd><dt><span class="sect1"><a href="#uuids">UUIDs</a></span></dt><dt><span class="sect1"><a href="#standard-interfaces">Standard Interfaces</a></span></dt><dd><dl><dt><span class="sect2"><a href="#standard-interfaces-peer"><code class="literal">org.freedesktop.DBus.Peer</code></a></span></dt><dt><span class="sect2"><a href="#standard-interfaces-introspectable"><code class="literal">org.freedesktop.DBus.Introspectable</code></a></span></dt><dt><span class="sect2"><a href="#standard-interfaces-properties"><code class="literal">org.freedesktop.DBus.Properties</code></a></span></dt><dt><span class="sect2"><a href="#standard-interfaces-objectmanager"><code class="literal">org.freedesktop.DBus.ObjectManager</code></a></span></dt></dl></dd><dt><span class="sect1"><a href="#introspection-format">Introspection Data Format</a></span></dt><dt><span class="sect1"><a href="#message-bus">Message Bus Specification</a></span></dt><dd><dl><dt><span class="sect2"><a href="#message-bus-overview">Message Bus Overview</a></span></dt><dt><span class="sect2"><a href="#message-bus-names">Message Bus Names</a></span></dt><dt><span class="sect2"><a href="#message-bus-routing">Message Bus Message Routing</a></span></dt><dt><span class="sect2"><a href="#message-bus-starting-services">Message Bus Starting Services</a></span></dt><dt><span class="sect2"><a href="#message-bus-types">Well-known Message Bus Instances</a></span></dt><dt><span class="sect2"><a href="#message-bus-messages">Message Bus Messages</a></span></dt></dl></dd><dt><span class="glossary"><a href="#idp4109160">Glossary</a></span></dt></dl></div><div class="sect1" title="Introduction"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="introduction"></a>Introduction</h2></div></div></div><p>
+        paths</td></tr><tr><td align="left">Revision 0.15</td><td align="left">3 November 2010</td><td align="left"></td></tr><tr><td align="left" colspan="3"></td></tr><tr><td align="left">Revision 0.14</td><td align="left">12 May 2010</td><td align="left"></td></tr><tr><td align="left" colspan="3"></td></tr><tr><td align="left">Revision 0.13</td><td align="left">23 Dezember 2009</td><td align="left"></td></tr><tr><td align="left" colspan="3"></td></tr><tr><td align="left">Revision 0.12</td><td align="left">7 November, 2006</td><td align="left"></td></tr><tr><td align="left" colspan="3"></td></tr><tr><td align="left">Revision 0.11</td><td align="left">6 February 2005</td><td align="left"></td></tr><tr><td align="left" colspan="3"></td></tr><tr><td align="left">Revision 0.10</td><td align="left">28 January 2005</td><td align="left"></td></tr><tr><td align="left" colspan="3"></td></tr><tr><td align="left">Revision 0.9</td><td align="left">7 Januar 2005</td><td align="left"></td></tr><tr><td align="left" colspan="3"></td></tr><tr><td align="left">Revision 0.8</td><td align="left">06 September 2003</td><td align="left"></td></tr><tr><td align="left" colspan="3">First released document.</td></tr></table></div></div></div><hr></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="sect1"><a href="#introduction">Introduction</a></span></dt><dd><dl><dt><span class="sect2"><a href="#stability">Protocol and Specification Stability</a></span></dt></dl></dd><dt><span class="sect1"><a href="#type-system">Type System</a></span></dt><dd><dl><dt><span class="sect2"><a href="#basic-types">Basic types</a></span></dt><dt><span class="sect2"><a href="#container-types">Container types</a></span></dt><dt><span class="sect2"><a href="#idp65160">Summary of types</a></span></dt></dl></dd><dt><span class="sect1"><a href="#message-protocol-marshaling">Marshaling (Wire Format)</a></span></dt><dd><dl><dt><span class="sect2"><a href="#idp134928">Byte order and alignment</a></span></dt><dt><span class="sect2"><a href="#idp138648">Marshalling basic types</a></span></dt><dt><span class="sect2"><a href="#idp3457424">Marshalling containers</a></span></dt><dt><span class="sect2"><a href="#idp3462360">Summary of D-Bus marshalling</a></span></dt></dl></dd><dt><span class="sect1"><a href="#message-protocol">Message Protocol</a></span></dt><dd><dl><dt><span class="sect2"><a href="#message-protocol-messages">Message Format</a></span></dt><dt><span class="sect2"><a href="#message-protocol-names">Valid Names</a></span></dt><dt><span class="sect2"><a href="#message-protocol-types">Message Types</a></span></dt><dt><span class="sect2"><a href="#message-protocol-handling-invalid">Invalid Protocol and Spec Extensions</a></span></dt></dl></dd><dt><span class="sect1"><a href="#auth-protocol">Authentication Protocol</a></span></dt><dd><dl><dt><span class="sect2"><a href="#auth-protocol-overview">Protocol Overview</a></span></dt><dt><span class="sect2"><a href="#auth-nul-byte">Special credentials-passing nul byte</a></span></dt><dt><span class="sect2"><a href="#auth-command-auth">AUTH command</a></span></dt><dt><span class="sect2"><a href="#auth-command-cancel">CANCEL Command</a></span></dt><dt><span class="sect2"><a href="#auth-command-data">DATA Command</a></span></dt><dt><span class="sect2"><a href="#auth-command-begin">BEGIN Command</a></span></dt><dt><span class="sect2"><a href="#auth-command-rejected">REJECTED Command</a></span></dt><dt><span class="sect2"><a href="#auth-command-ok">OK Command</a></span></dt><dt><span class="sect2"><a href="#auth-command-error">ERROR Command</a></span></dt><dt><span class="sect2"><a href="#auth-command-negotiate-unix-fd">NEGOTIATE_UNIX_FD Command</a></span></dt><dt><span class="sect2"><a href="#auth-command-agree-unix-fd">AGREE_UNIX_FD Command</a></span></dt><dt><span class="sect2"><a href="#auth-command-future">Future Extensions</a></span></dt><dt><span class="sect2"><a href="#auth-examples">Authentication examples</a></span></dt><dt><span class="sect2"><a href="#auth-states">Authentication state diagrams</a></span></dt><dt><span class="sect2"><a href="#auth-mechanisms">Authentication mechanisms</a></span></dt></dl></dd><dt><span class="sect1"><a href="#addresses">Server Addresses</a></span></dt><dt><span class="sect1"><a href="#transports">Transports</a></span></dt><dd><dl><dt><span class="sect2"><a href="#transports-unix-domain-sockets">Unix Domain Sockets</a></span></dt><dt><span class="sect2"><a href="#transports-launchd">launchd</a></span></dt><dt><span class="sect2"><a href="#transports-systemd">systemd</a></span></dt><dt><span class="sect2"><a href="#transports-tcp-sockets">TCP Sockets</a></span></dt><dt><span class="sect2"><a href="#transports-nonce-tcp-sockets">Nonce-secured TCP Sockets</a></span></dt><dt><span class="sect2"><a href="#transports-exec">Executed Subprocesses on Unix</a></span></dt></dl></dd><dt><span class="sect1"><a href="#meta-transports">Meta Transports</a></span></dt><dd><dl><dt><span class="sect2"><a href="#meta-transports-autolaunch">Autolaunch</a></span></dt></dl></dd><dt><span class="sect1"><a href="#uuids">UUIDs</a></span></dt><dt><span class="sect1"><a href="#standard-interfaces">Standard Interfaces</a></span></dt><dd><dl><dt><span class="sect2"><a href="#standard-interfaces-peer"><code class="literal">org.freedesktop.DBus.Peer</code></a></span></dt><dt><span class="sect2"><a href="#standard-interfaces-introspectable"><code class="literal">org.freedesktop.DBus.Introspectable</code></a></span></dt><dt><span class="sect2"><a href="#standard-interfaces-properties"><code class="literal">org.freedesktop.DBus.Properties</code></a></span></dt><dt><span class="sect2"><a href="#standard-interfaces-objectmanager"><code class="literal">org.freedesktop.DBus.ObjectManager</code></a></span></dt></dl></dd><dt><span class="sect1"><a href="#introspection-format">Introspection Data Format</a></span></dt><dt><span class="sect1"><a href="#message-bus">Message Bus Specification</a></span></dt><dd><dl><dt><span class="sect2"><a href="#message-bus-overview">Message Bus Overview</a></span></dt><dt><span class="sect2"><a href="#message-bus-names">Message Bus Names</a></span></dt><dt><span class="sect2"><a href="#message-bus-routing">Message Bus Message Routing</a></span></dt><dt><span class="sect2"><a href="#message-bus-starting-services">Message Bus Starting Services</a></span></dt><dt><span class="sect2"><a href="#message-bus-types">Well-known Message Bus Instances</a></span></dt><dt><span class="sect2"><a href="#message-bus-messages">Message Bus Messages</a></span></dt></dl></dd><dt><span class="glossary"><a href="#idp4141952">Glossary</a></span></dt></dl></div><div class="sect1" title="Introduction"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="introduction"></a>Introduction</h2></div></div></div><p>
       D-Bus is a system for low-overhead, easy to use
       interprocess communication (IPC). In more detail:
       </p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>
@@ -358,7 +358,7 @@
       </p><p>
         In most languages, an array of dict entry would be represented as a 
         map, hash table, or dict object.
-      </p></div><div class="sect2" title="Summary of types"><div class="titlepage"><div><div><h3 class="title"><a name="idp3387016"></a>Summary of types</h3></div></div></div><p>
+      </p></div><div class="sect2" title="Summary of types"><div class="titlepage"><div><div><h3 class="title"><a name="idp65160"></a>Summary of types</h3></div></div></div><p>
         The following table summarizes the D-Bus types.
         </p><div class="informaltable"><table border="1"><colgroup><col><col><col></colgroup><thead><tr><th>Category</th><th>Conventional Name</th><th>Code</th><th>Description</th></tr></thead><tbody><tr><td>reserved</td><td><code class="literal">INVALID</code></td><td>0 (ASCII NUL)</td><td>Not a valid type code, used to terminate signatures</td></tr><tr><td>fixed, basic</td><td><code class="literal">BYTE</code></td><td>121 (ASCII 'y')</td><td>8-bit unsigned integer</td></tr><tr><td>fixed, basic</td><td><code class="literal">BOOLEAN</code></td><td>98 (ASCII 'b')</td><td>Boolean value, 0 is <code class="literal">FALSE</code> and 1 is <code class="literal">TRUE</code>. Everything else is invalid.</td></tr><tr><td>fixed, basic</td><td><code class="literal">INT16</code></td><td>110 (ASCII 'n')</td><td>16-bit signed integer</td></tr><tr><td>fixed, basic</td><td><code class="literal">UINT16</code></td><td>113 (ASCII 'q')</td><td>16-bit unsigned integer</td></tr><tr><td>fixed, basic</td><td><code class="literal">INT32</code></td><td>105 (ASCII 'i')</td><td>32-bit signed integer</td></tr><tr><td>fixed, basic</td><td><code class="literal">UINT32</code></td><td>117 (ASCII 'u')</td><td>32-bit unsigned integer</td></tr><tr><td>fixed, basic</td><td><code class="literal">INT64</code></td><td>120 (ASCII 'x')</td><td>64-bit signed integer</td></tr><tr><td>fixed, basic</td><td><code class="literal">UINT64</code></td><td>116 (ASCII 't')</td><td>64-bit unsigned integer</td></tr><tr><td>fixed, basic</td><td><code class="literal">DOUBLE</code></td><td>100 (ASCII 'd')</td><td>IEEE 754 double</td></tr><tr><td>string-like, basic</td><td><code class="literal">STRING</code></td><td>115 (ASCII 's')</td><td>UTF-8 string (<span class="emphasis"><em>must</em></span> be valid UTF-8). Must be nul terminated and contain no other nul bytes.</td></tr><tr><td>string-like, basic</td><td><code class="literal">OBJECT_PATH</code></td><td>111 (ASCII 'o')</td><td>Name of an object instance</td></tr><tr><td>string-like, basic</td><td><code class="literal">SIGNATURE</code></td><td>103 (ASCII 'g')</td><td>A type signature</td></tr><tr><td>container</td><td><code class="literal">ARRAY</code></td><td>97 (ASCII 'a')</td><td>Array</td></tr><tr><td>container</td><td><code class="literal">STRUCT</code></td><td>114 (ASCII 'r'), 40 (ASCII '('), 41 (ASCII ')')</td><td>Struct; type code 114 'r' is reserved for use in
                   bindings and implementations to represent the general
@@ -385,7 +385,7 @@
       format for the type system: for instance, GVariant (part of GLib)
       re-uses the D-Bus type system but implements an alternative marshalling
       format.
-    </p><div class="sect2" title="Byte order and alignment"><div class="titlepage"><div><div><h3 class="title"><a name="idp3417240"></a>Byte order and alignment</h3></div></div></div><p>
+    </p><div class="sect2" title="Byte order and alignment"><div class="titlepage"><div><div><h3 class="title"><a name="idp134928"></a>Byte order and alignment</h3></div></div></div><p>
         Given a type signature, a block of bytes can be converted into typed
         values. This section describes the format of the block of bytes.  Byte
         order and alignment issues are handled uniformly for all D-Bus types.
@@ -409,7 +409,7 @@
         As an exception to natural alignment, <code class="literal">STRUCT</code> and
         <code class="literal">DICT_ENTRY</code> values are always aligned to an 8-byte
         boundary, regardless of the alignments of their contents.
-      </p></div><div class="sect2" title="Marshalling basic types"><div class="titlepage"><div><div><h3 class="title"><a name="idp3420776"></a>Marshalling basic types</h3></div></div></div><p>
+      </p></div><div class="sect2" title="Marshalling basic types"><div class="titlepage"><div><div><h3 class="title"><a name="idp138648"></a>Marshalling basic types</h3></div></div></div><p>
         To marshal and unmarshal fixed types, you simply read one value
         from the data block corresponding to each type code in the signature.
         All signed integer values are encoded in two's complement, DOUBLE
@@ -430,7 +430,7 @@
         For the SIGNATURE type, <code class="varname">n</code> is encoded as a single
         byte. As a result, alignment padding is never required before a
         SIGNATURE.
-      </p></div><div class="sect2" title="Marshalling containers"><div class="titlepage"><div><div><h3 class="title"><a name="idp3423792"></a>Marshalling containers</h3></div></div></div><p>
+      </p></div><div class="sect2" title="Marshalling containers"><div class="titlepage"><div><div><h3 class="title"><a name="idp3457424"></a>Marshalling containers</h3></div></div></div><p>
         Arrays are marshalled as a <code class="literal">UINT32</code>
         <code class="varname">n</code> giving the length of the array data in bytes,
         followed by alignment padding to the alignment boundary of the array
@@ -464,7 +464,7 @@
         that alignment padding before a variant is never needed.
         Use of variants may not cause a total message depth to be larger
         than 64, including other container types such as structures.
-      </p></div><div class="sect2" title="Summary of D-Bus marshalling"><div class="titlepage"><div><div><h3 class="title"><a name="idp3428728"></a>Summary of D-Bus marshalling</h3></div></div></div><p>
+      </p></div><div class="sect2" title="Summary of D-Bus marshalling"><div class="titlepage"><div><div><h3 class="title"><a name="idp3462360"></a>Summary of D-Bus marshalling</h3></div></div></div><p>
         Given all this, the types are marshaled on the wire as follows:
         </p><div class="informaltable"><table border="1"><colgroup><col><col><col></colgroup><thead><tr><th>Conventional Name</th><th>Encoding</th><th>Alignment</th></tr></thead><tbody><tr><td><code class="literal">INVALID</code></td><td>Not applicable; cannot be marshaled.</td><td>N/A</td></tr><tr><td><code class="literal">BYTE</code></td><td>A single 8-bit byte.</td><td>1</td></tr><tr><td><code class="literal">BOOLEAN</code></td><td>As for <code class="literal">UINT32</code>, but only 0 and 1 are valid values.</td><td>4</td></tr><tr><td><code class="literal">INT16</code></td><td>16-bit signed integer in the message's byte order.</td><td>2</td></tr><tr><td><code class="literal">UINT16</code></td><td>16-bit unsigned integer in the message's byte order.</td><td>2</td></tr><tr><td><code class="literal">INT32</code></td><td>32-bit signed integer in the message's byte order.</td><td>4</td></tr><tr><td><code class="literal">UINT32</code></td><td>32-bit unsigned integer in the message's byte order.</td><td>4</td></tr><tr><td><code class="literal">INT64</code></td><td>64-bit signed integer in the message's byte order.</td><td>8</td></tr><tr><td><code class="literal">UINT64</code></td><td>64-bit unsigned integer in the message's byte order.</td><td>8</td></tr><tr><td><code class="literal">DOUBLE</code></td><td>64-bit IEEE 754 double in the message's byte order.</td><td>8</td></tr><tr><td><code class="literal">STRING</code></td><td>A <code class="literal">UINT32</code> indicating the string's 
                   length in bytes excluding its terminating nul, followed by 
@@ -1213,14 +1213,14 @@
         commands may be introduced both before, and after
         authentication, i.e. both before and after the OK command.
       </p></div><div class="sect2" title="Authentication examples"><div class="titlepage"><div><div><h3 class="title"><a name="auth-examples"></a>Authentication examples</h3></div></div></div><p>
-        </p><div class="figure"><a name="idp3612640"></a><p class="title"><b>Figure 1. Example of successful magic cookie authentication</b></p><div class="figure-contents"><pre class="programlisting">
+        </p><div class="figure"><a name="idp3645440"></a><p class="title"><b>Figure 1. Example of successful magic cookie authentication</b></p><div class="figure-contents"><pre class="programlisting">
             (MAGIC_COOKIE is a made up mechanism)
 
             C: AUTH MAGIC_COOKIE 3138363935333137393635383634
             S: OK 1234deadbeef
             C: BEGIN
           </pre></div></div><p><br class="figure-break">
-        </p><div class="figure"><a name="idp3613696"></a><p class="title"><b>Figure 2. Example of finding out mechanisms then picking one</b></p><div class="figure-contents"><pre class="programlisting">
+        </p><div class="figure"><a name="idp3646496"></a><p class="title"><b>Figure 2. Example of finding out mechanisms then picking one</b></p><div class="figure-contents"><pre class="programlisting">
             C: AUTH
             S: REJECTED KERBEROS_V4 SKEY
             C: AUTH SKEY 7ab83f32ee
@@ -1229,14 +1229,14 @@
             S: OK 1234deadbeef
             C: BEGIN
           </pre></div></div><p><br class="figure-break">
-        </p><div class="figure"><a name="idp3614832"></a><p class="title"><b>Figure 3. Example of client sends unknown command then falls back to regular auth</b></p><div class="figure-contents"><pre class="programlisting">
+        </p><div class="figure"><a name="idp3647632"></a><p class="title"><b>Figure 3. Example of client sends unknown command then falls back to regular auth</b></p><div class="figure-contents"><pre class="programlisting">
             C: FOOBAR
             S: ERROR
             C: AUTH MAGIC_COOKIE 3736343435313230333039
             S: OK 1234deadbeef
             C: BEGIN
           </pre></div></div><p><br class="figure-break">
-        </p><div class="figure"><a name="idp3615896"></a><p class="title"><b>Figure 4. Example of server doesn't support initial auth mechanism</b></p><div class="figure-contents"><pre class="programlisting">
+        </p><div class="figure"><a name="idp3648696"></a><p class="title"><b>Figure 4. Example of server doesn't support initial auth mechanism</b></p><div class="figure-contents"><pre class="programlisting">
             C: AUTH MAGIC_COOKIE 3736343435313230333039
             S: REJECTED KERBEROS_V4 SKEY
             C: AUTH SKEY 7ab83f32ee
@@ -1245,7 +1245,7 @@
             S: OK 1234deadbeef
             C: BEGIN
           </pre></div></div><p><br class="figure-break">
-        </p><div class="figure"><a name="idp3617080"></a><p class="title"><b>Figure 5. Example of wrong password or the like followed by successful retry</b></p><div class="figure-contents"><pre class="programlisting">
+        </p><div class="figure"><a name="idp3649880"></a><p class="title"><b>Figure 5. Example of wrong password or the like followed by successful retry</b></p><div class="figure-contents"><pre class="programlisting">
             C: AUTH MAGIC_COOKIE 3736343435313230333039
             S: REJECTED KERBEROS_V4 SKEY
             C: AUTH SKEY 7ab83f32ee
@@ -1258,7 +1258,7 @@
             S: OK 1234deadbeef
             C: BEGIN
           </pre></div></div><p><br class="figure-break">
-        </p><div class="figure"><a name="idp3618432"></a><p class="title"><b>Figure 6. Example of skey cancelled and restarted</b></p><div class="figure-contents"><pre class="programlisting">
+        </p><div class="figure"><a name="idp3651232"></a><p class="title"><b>Figure 6. Example of skey cancelled and restarted</b></p><div class="figure-contents"><pre class="programlisting">
             C: AUTH MAGIC_COOKIE 3736343435313230333039
             S: REJECTED KERBEROS_V4 SKEY
             C: AUTH SKEY 7ab83f32ee
@@ -1271,7 +1271,7 @@
             S: OK 1234deadbeef
             C: BEGIN
           </pre></div></div><p><br class="figure-break">
-        </p><div class="figure"><a name="idp3619712"></a><p class="title"><b>Figure 7. Example of successful magic cookie authentication with successful negotiation of Unix FD passing</b></p><div class="figure-contents"><pre class="programlisting">
+        </p><div class="figure"><a name="idp3652512"></a><p class="title"><b>Figure 7. Example of successful magic cookie authentication with successful negotiation of Unix FD passing</b></p><div class="figure-contents"><pre class="programlisting">
             (MAGIC_COOKIE is a made up mechanism)
 
             C: AUTH MAGIC_COOKIE 3138363935333137393635383634
@@ -1280,7 +1280,7 @@
             S: AGREE_UNIX_FD
             C: BEGIN
           </pre></div></div><p><br class="figure-break">
-        </p><div class="figure"><a name="idp3620880"></a><p class="title"><b>Figure 8. Example of successful magic cookie authentication with unsuccessful negotiation of Unix FD passing</b></p><div class="figure-contents"><pre class="programlisting">
+        </p><div class="figure"><a name="idp3653680"></a><p class="title"><b>Figure 8. Example of successful magic cookie authentication with unsuccessful negotiation of Unix FD passing</b></p><div class="figure-contents"><pre class="programlisting">
             (MAGIC_COOKIE is a made up mechanism)
 
             C: AUTH MAGIC_COOKIE 3138363935333137393635383634
@@ -1558,7 +1558,7 @@
                 fails, the lock fails. Servers should retry for a reasonable
                 period of time, then they may choose to delete an existing lock
                 to keep users from having to manually delete a stale
-                lock. <sup>[<a name="idp3669168" href="#ftn.idp3669168" class="footnote">1</a>]</sup>
+                lock. <sup>[<a name="idp3701960" href="#ftn.idp3701960" class="footnote">1</a>]</sup>
               </p></li><li class="listitem"><p>
                 Once the lockfile has been created, the server loads the cookie
                 file. It should then delete any cookies that are old (the
@@ -2563,7 +2563,7 @@
           both match messages where the arguments are a 1-character string
           containing an apostrophe, a 1-character string containing a
           backslash, a 1-character string containing a comma, and a
-          2-character string containing two backslashes<sup>[<a name="idp3889128" href="#ftn.idp3889128" class="footnote">2</a>]</sup>.
+          2-character string containing two backslashes<sup>[<a name="idp3921920" href="#ftn.idp3921920" class="footnote">2</a>]</sup>.
         </p><p>
           The following table describes the keys that can be used to create 
           a match rule.
@@ -2737,7 +2737,7 @@
         <code class="literal">Name</code> (the well-known name of the service)
         and <code class="literal">Exec</code> (the command to be executed).
 
-        </p><div class="figure"><a name="idp3929464"></a><p class="title"><b>Figure 9. Example service description file</b></p><div class="figure-contents"><pre class="programlisting">
+        </p><div class="figure"><a name="idp3962256"></a><p class="title"><b>Figure 9. Example service description file</b></p><div class="figure-contents"><pre class="programlisting">
             # Sample service description file
             [D-BUS Service]
             Name=com.example.ConfigurationDatabase
@@ -2925,7 +2925,7 @@
             allowing another process to set the selection between the
             verification and the setting (e.g., by using XGrabServer /
             XungrabServer).
-          </p></div><div class="sect4"><div class="titlepage"><div><div><h5 class="title"><a name="idp3963680"></a></h5></div></div></div><p>
+          </p></div><div class="sect4"><div class="titlepage"><div><div><h5 class="title"><a name="idp3996472"></a></h5></div></div></div><p>
             On Unix systems, the session bus should search for .service files
             in <code class="literal">$XDG_DATA_DIRS/dbus-1/services</code> as defined
             by the
@@ -2955,7 +2955,7 @@
           variable. If that variable is not set, applications should try 
           to connect to the well-known address
           <code class="literal">unix:path=/var/run/dbus/system_bus_socket</code>.
-          <sup>[<a name="idp3969248" href="#ftn.idp3969248" class="footnote">3</a>]</sup>
+          <sup>[<a name="idp4002040" href="#ftn.idp4002040" class="footnote">3</a>]</sup>
         </p><p>
           On Unix systems, the system bus should default to searching
           for .service files in
@@ -2965,7 +2965,7 @@
           of precedence. It may also search other implementation-specific
           locations, but should not vary these locations based on environment
           variables.
-          <sup>[<a name="idp3971688" href="#ftn.idp3971688" class="footnote">4</a>]</sup>
+          <sup>[<a name="idp4004480" href="#ftn.idp4004480" class="footnote">4</a>]</sup>
         </p><p>
           Software packages should install their system .service
           files to their configured
@@ -3157,12 +3157,12 @@
                   <p>On Linux systems, the security label that would result
                     from the SO_PEERSEC getsockopt call. The array contains
                     the non-zero bytes of the security label in an unspecified
-                    ASCII-compatible encoding<sup>[<a name="idp4060648" href="#ftn.idp4060648" class="footnote">a</a>]</sup>, followed by a single zero byte.</p>
+                    ASCII-compatible encoding<sup>[<a name="idp4093440" href="#ftn.idp4093440" class="footnote">a</a>]</sup>, followed by a single zero byte.</p>
                   <p>
                     For example, the SELinux context
                     <code class="literal">system_u:system_r:init_t:s0</code>
                     (a string of length 27) would be encoded as 28 bytes
-                    ending with ':', 's', '0', '\x00'.<sup>[<a name="idp4061904" href="#ftn.idp4061904" class="footnote">b</a>]</sup>
+                    ending with ':', 's', '0', '\x00'.<sup>[<a name="idp4094696" href="#ftn.idp4094696" class="footnote">b</a>]</sup>
                   </p>
                   <p>
                     On SELinux systems this is the SELinux context, as output
@@ -3188,8 +3188,8 @@
                     <code class="literal">/usr/bin/firefox (enforce)</code> or
                     <code class="literal">user1 (complain)</code>.
                   </p>
-                </td></tr></tbody><tbody class="footnotes"><tr><td colspan="3"><div class="footnote"><p><sup>[<a id="ftn.idp4060648" href="#idp4060648" class="para">a</a>] </sup>It could be ASCII or UTF-8, but could also be
-                        ISO Latin-1 or any other encoding.</p></div><div class="footnote"><p><sup>[<a id="ftn.idp4061904" href="#idp4061904" class="para">b</a>] </sup>Note that this is not the same as the older
+                </td></tr></tbody><tbody class="footnotes"><tr><td colspan="3"><div class="footnote"><p><sup>[<a id="ftn.idp4093440" href="#idp4093440" class="para">a</a>] </sup>It could be ASCII or UTF-8, but could also be
+                        ISO Latin-1 or any other encoding.</p></div><div class="footnote"><p><sup>[<a id="ftn.idp4094696" href="#idp4094696" class="para">b</a>] </sup>Note that this is not the same as the older
                         GetConnectionSELinuxContext method, which does
                         not append the zero byte. Always appending the
                         zero byte allows callers to read the string
@@ -3285,7 +3285,7 @@
             connection</em></span> which can be used as a debugging/monitoring
           tool. Only a user who is privileged on this
           bus (by some implementation-specific definition) may create
-          monitor connections<sup>[<a name="idp4105032" href="#ftn.idp4105032" class="footnote">5</a>]</sup>.
+          monitor connections<sup>[<a name="idp4137824" href="#ftn.idp4137824" class="footnote">5</a>]</sup>.
        </p><p>
          Monitor connections lose all their bus names, including the unique
          connection name, and all their match rules. Sending messages on a
@@ -3316,7 +3316,7 @@
          edge cases where there was barely enough time or memory without
          monitoring, this might result in message deliveries failing
          when they would otherwise have succeeded.
-       </p></div></div></div><div class="glossary" title="Glossary"><div class="titlepage"><div><div><h2 class="title"><a name="idp4109160"></a>Glossary</h2></div></div></div><p>
+       </p></div></div></div><div class="glossary" title="Glossary"><div class="titlepage"><div><div><h2 class="title"><a name="idp4141952"></a>Glossary</h2></div></div></div><p>
       This glossary defines some of the terms used in this specification.
     </p><dl><dt><a name="term-bus-name"></a>Bus Name</dt><dd><p>
           The message bus maintains an association between names and
@@ -3397,10 +3397,10 @@
           message bus. This name will never change owner, and will be unique
           (never reused during the lifetime of the message bus).
           It will begin with a ':' character.
-        </p></dd></dl></div><div class="footnotes"><br><hr width="100" align="left"><div class="footnote"><p><sup>[<a id="ftn.idp3669168" href="#idp3669168" class="para">1</a>] </sup>Lockfiles are used instead of real file
+        </p></dd></dl></div><div class="footnotes"><br><hr width="100" align="left"><div class="footnote"><p><sup>[<a id="ftn.idp3701960" href="#idp3701960" class="para">1</a>] </sup>Lockfiles are used instead of real file
                 locking <code class="literal">fcntl()</code> because real locking
                 implementations are still flaky on network
-                filesystems.</p></div><div class="footnote"><p><sup>[<a id="ftn.idp3889128" href="#idp3889128" class="para">2</a>] </sup>
+                filesystems.</p></div><div class="footnote"><p><sup>[<a id="ftn.idp3921920" href="#idp3921920" class="para">2</a>] </sup>
               This idiosyncratic quoting style is based on the rules for
               escaping items to appear inside single-quoted strings
               in POSIX <code class="literal">/bin/sh</code>, but please
@@ -3411,16 +3411,16 @@
               apostrophe and re-enter single quotes), or to represent a
               comma outside single quotes (it is necessary to wrap it in
               a single-quoted section).
-            </p></div><div class="footnote"><p><sup>[<a id="ftn.idp3969248" href="#idp3969248" class="para">3</a>] </sup>
+            </p></div><div class="footnote"><p><sup>[<a id="ftn.idp4002040" href="#idp4002040" class="para">3</a>] </sup>
               The D-Bus reference implementation actually honors the 
               <code class="literal">$(localstatedir)</code> configure option 
               for this address, on both client and server side.
-            </p></div><div class="footnote"><p><sup>[<a id="ftn.idp3971688" href="#idp3971688" class="para">4</a>] </sup>
+            </p></div><div class="footnote"><p><sup>[<a id="ftn.idp4004480" href="#idp4004480" class="para">4</a>] </sup>
               The system bus is security-sensitive and is typically executed
               by an init system with a clean environment. Its launch helper
               process is particularly security-sensitive, and specifically
               clears its own environment.
-            </p></div><div class="footnote"><p><sup>[<a id="ftn.idp4105032" href="#idp4105032" class="para">5</a>] </sup>
+            </p></div><div class="footnote"><p><sup>[<a id="ftn.idp4137824" href="#idp4137824" class="para">5</a>] </sup>
               In the reference implementation,
               the default configuration is that each user (identified by
               numeric user ID) may monitor their own session bus,

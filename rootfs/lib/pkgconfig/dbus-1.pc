@@ -1,9 +1,9 @@
-prefix=/usr/OSS/dbus_relative/dbus_install
+prefix=
 exec_prefix=${prefix}
 bindir=${exec_prefix}/bin
 libdir=${exec_prefix}/lib
 includedir=${prefix}/include
-system_bus_default_address=unix:path=/usr/OSS/dbus_relative/dbus_install/var/run/dbus/system_bus_socket
+system_bus_default_address=unix:path=/var/run/dbus/system_bus_socket
 datarootdir=${prefix}/share
 datadir=${datarootdir}
 sysconfdir=${prefix}/etc
@@ -16,5 +16,5 @@ Name: dbus
 Description: Free desktop message bus
 Version: 1.10.6
 Libs: -L${libdir} -ldbus-1
-Libs.private: -lrt -lpthread    
+Libs.private: -lrt -lpthread    -L/usr/OSS/Production/lib -lsystemd
 Cflags: -I${includedir}/dbus-1.0 -I${libdir}/dbus-1.0/include 

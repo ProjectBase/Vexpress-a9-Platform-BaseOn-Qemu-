@@ -1,0 +1,14 @@
+# maintainer: CpM Connectivity
+[Unit]
+Description=dbus-monitor for dbus system message bus
+Requires=prepare-btwifi-logging.service
+After=prepare-btwifi-logging.service
+
+[Service]
+Type=forking
+EnvironmentFile=/opt/bosch/connectivity/connectivity_envvars.txt
+ExecStart=/opt/bosch/connectivity/logging/start_dbus_monitor_system.sh
+KillSignal=SIGKILL
+
+[Install]
+WantedBy=multi-user.target

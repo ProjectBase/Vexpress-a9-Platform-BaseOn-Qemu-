@@ -1,0 +1,5 @@
+#!/bin/sh
+
+echo "entry init file"
+
+exec /usr/lib/systemd/systemd --log-level=debug --log-location=1 --dump-core=1 --show-status=1 --confirm-spawn --log-target=consol
