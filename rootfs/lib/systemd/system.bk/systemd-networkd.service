@@ -18,7 +18,7 @@ ConditionCapability=CAP_NET_ADMIN
 Type=notify
 Restart=always
 RestartSec=0
-ExecStart=//lib/systemd/systemd-networkd
+ExecStart=/lib/systemd/systemd-networkd
 WatchdogSec=1min
 
 [Install]

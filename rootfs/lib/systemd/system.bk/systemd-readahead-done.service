@@ -16,7 +16,7 @@ ConditionVirtualization=no
 
 [Service]
 Type=oneshot
-ExecStart=//bin/systemd-notify --readahead=done
+ExecStart=/bin/systemd-notify --readahead=done
 
 [Install]
 Also=systemd-readahead-collect.service

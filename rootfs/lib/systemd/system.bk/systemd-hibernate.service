@@ -14,4 +14,4 @@ After=sleep.target
 
 [Service]
 Type=oneshot
-ExecStart=//lib/systemd/systemd-sleep hibernate
+ExecStart=/lib/systemd/systemd-sleep hibernate

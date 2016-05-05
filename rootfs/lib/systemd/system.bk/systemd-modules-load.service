@@ -24,4 +24,4 @@ ConditionKernelCommandLine=|rd.modules-load
 [Service]
 Type=oneshot
 RemainAfterExit=yes
-ExecStart=//lib/systemd/systemd-modules-load
+ExecStart=/lib/systemd/systemd-modules-load

@@ -1,0 +1,19 @@
+# Robert Bosch Car Multimedia GmbH 2012
+# To speed up eth0 availability:
+# - remove service from network target and add it to multi-user target
+# - start asix kernel module manually in order to bring up eth0
+# These activities avoid that eth0 is not available until udev has handled that.
+
+[Unit]
+Description=Configure interface eth0
+DefaultDependencies=no
+
+[Service]
+#ExecStartPre=/sbin/modprobe asix
+ExecStartPre=/bin/sleep 2
+#ExecStart=/sbin/ifconfig eth0 up 172.17.0.1
+ExecStart=/bin/sleep 1
+Type=oneshot
+
+[Install]
+WantedBy=multi-user.target

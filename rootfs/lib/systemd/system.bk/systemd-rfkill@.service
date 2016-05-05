@@ -17,5 +17,5 @@ Before=sysinit.target shutdown.target
 [Service]
 Type=oneshot
 RemainAfterExit=yes
-ExecStart=//lib/systemd/systemd-rfkill load %I
-ExecStop=//lib/systemd/systemd-rfkill save %I
+ExecStart=/lib/systemd/systemd-rfkill load %I
+ExecStop=/lib/systemd/systemd-rfkill save %I

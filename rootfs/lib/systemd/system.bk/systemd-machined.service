@@ -13,7 +13,7 @@ Wants=machine.slice
 After=machine.slice
 
 [Service]
-ExecStart=//lib/systemd/systemd-machined
+ExecStart=/lib/systemd/systemd-machined
 BusName=org.freedesktop.machine1
 CapabilityBoundingSet=CAP_KILL
 WatchdogSec=1min

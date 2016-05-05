@@ -22,4 +22,4 @@ ConditionPathIsReadWrite=/sys
 Type=oneshot
 TimeoutSec=180
 RemainAfterExit=yes
-ExecStart=//bin/udevadm settle
+ExecStart=/bin/udevadm settle

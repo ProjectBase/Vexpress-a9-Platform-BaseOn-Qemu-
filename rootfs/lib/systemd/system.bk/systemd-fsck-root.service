@@ -17,6 +17,6 @@ ConditionPathIsReadWrite=!/
 [Service]
 Type=oneshot
 RemainAfterExit=yes
-ExecStart=//lib/systemd/systemd-fsck
+ExecStart=/lib/systemd/systemd-fsck
 StandardOutput=journal+console
 TimeoutSec=0

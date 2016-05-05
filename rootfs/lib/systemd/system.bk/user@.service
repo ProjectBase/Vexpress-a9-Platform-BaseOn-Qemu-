@@ -13,6 +13,6 @@ After=systemd-user-sessions.service
 User=%i
 PAMName=systemd-user
 Type=notify
-ExecStart=-//lib/systemd/systemd --user
+ExecStart=-/lib/systemd/systemd --user
 Slice=user-%i.slice
 KillMode=mixed
