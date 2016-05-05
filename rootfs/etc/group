@@ -66,3 +66,4 @@ vboxsf:x:1001:
 winbindd_priv:x:125:
 sophosav:x:1002:
 systemd-journal:x:1314:
+lock:x:1315:
