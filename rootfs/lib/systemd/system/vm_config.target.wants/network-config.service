@@ -1,0 +1,13 @@
+[Unit]
+Description=Configure interface eth0
+DefaultDependencies=no
+
+[Service]
+ExecStartPre=/sbin/modprobe tun
+ExecStartPre=/bin/sleep 2
+ExecStart=/sbin/ifconfig eth0 up 172.20.0.10
+ExecStart=/bin/sleep 1
+Type=oneshot
+
+[Install]
+WantedBy=multi-user.target
