@@ -1,0 +1,26 @@
+1:安装nfs
+
+sudo apt-get install nfs-kernel-server
+
+2:定义nfs允许挂载的目录及权限
+
+打开/etc/exports文件，在末尾加入：
+
+/home/xgc *(rw,sync,no_root_squash)
+
+3:重启服务
+
+(1):sudo /etc/init.d/portmap restart
+
+(2):sudo /etc/init.d/nfs-kernel-server restart
+
+(3):showmount -e
+
+4:本机测试
+
+sudo mount -t nfs localhost:/home/jeffery /mnt
+
+5:在嵌入式设备上挂载时加-o nolock
+
+sudo mount -t nfs 192.168.10.129:/home/jeffery /mnt/nfs/ -o nolock
+
