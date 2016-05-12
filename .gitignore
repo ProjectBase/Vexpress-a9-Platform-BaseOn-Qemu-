@@ -1,4 +1,4 @@
 
-*.ext3
+*.ext3*
 *.cpio
 rootfs/lib/modules/*
