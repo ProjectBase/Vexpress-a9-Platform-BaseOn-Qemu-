@@ -1,0 +1,19 @@
+# Aliases for symbols, used by symbol_request().
+alias symbol:rxrpc_get_server_data_key af_rxrpc
+alias symbol:rxrpc_kernel_free_skb af_rxrpc
+alias symbol:rxrpc_unregister_security af_rxrpc
+alias symbol:key_type_rxrpc af_rxrpc
+alias symbol:rxrpc_kernel_begin_call af_rxrpc
+alias symbol:tun_get_socket tun
+alias symbol:rxrpc_register_security af_rxrpc
+alias symbol:rxrpc_kernel_get_error_number af_rxrpc
+alias symbol:rxrpc_kernel_intercept_rx_messages af_rxrpc
+alias symbol:rxrpc_kernel_end_call af_rxrpc
+alias symbol:rxrpc_kernel_send_data af_rxrpc
+alias symbol:rxrpc_get_null_key af_rxrpc
+alias symbol:rxrpc_kernel_reject_call af_rxrpc
+alias symbol:rxrpc_kernel_get_abort_code af_rxrpc
+alias symbol:rxrpc_kernel_is_data_last af_rxrpc
+alias symbol:rxrpc_kernel_abort_call af_rxrpc
+alias symbol:rxrpc_kernel_data_delivered af_rxrpc
+alias symbol:rxrpc_kernel_accept_call af_rxrpc

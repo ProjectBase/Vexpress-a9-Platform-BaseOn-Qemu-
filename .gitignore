@@ -2,3 +2,4 @@
 *.ext3*
 *.cpio
 rootfs/lib/modules/*
+product/*

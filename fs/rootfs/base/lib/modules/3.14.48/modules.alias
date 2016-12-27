@@ -1,0 +1,4 @@
+# Aliases extracted from modules themselves.
+alias devname:net/tun tun
+alias char-major-10-200 tun
+alias net-pf-33 af_rxrpc
