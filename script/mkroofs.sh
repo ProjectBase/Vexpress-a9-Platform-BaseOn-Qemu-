@@ -22,7 +22,7 @@ sudo cp ../fs/rootfs/base/* -r $product_path/rootfs/
 #sudo mknod $product_path/rootfs/dev/tty3 c 4 3
 #sudo mknod $product_path/rootfs/dev/tty4 c 4 4
 
-sh package_rootfs.sh
+sh package_rootfs_ext3.sh
 
 #dd if=/dev/zero of=$product_path/a9rootfs.ext3 bs=1M count=1024
 #mkfs.ext3 $product_path/a9rootfs.ext3

@@ -1,6 +1,0 @@
-[Match]
-Virtualization=container
-Name=host0
-
-[Network]
-DHCP=yes

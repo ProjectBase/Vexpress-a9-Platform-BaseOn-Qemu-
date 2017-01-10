@@ -1,8 +1,0 @@
-[Unit]
-Description=Configure NFS
-DefaultDependencies=no
-After=network-config.service
-
-[Service]
-ExecStart=/bin/mount -t nfs 172.20.0.1:/usr/M_Workspace/nfs /tmp -o nolock
-Type=oneshot

@@ -1,9 +1,0 @@
-[Unit]
-Description=Configure SSH
-DefaultDependencies=no
-#Requires=network-config.service
-After=network-config.service
-
-[Service]
-ExecStart=/sbin/sshd -d
-Type=oneshot
